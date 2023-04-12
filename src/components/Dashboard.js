@@ -4,10 +4,14 @@ export default function Dashboard() {
   const [jobDescription, setJobDescription] = useState("");
 
   const [jobTitle, setJobTitle] = useState("");
-  const [industry, setIndustry] = useState("");
   const [keyWords, setKeyWords] = useState("");
   const [tone, setTone] = useState("");
   const [numWords, setNumWords] = useState("");
+  const [salary, setSalary] = useState("");
+  const [company, setCompany] = useState("");
+  const [experience, setExperience] = useState("");
+  const [location, setLocation] = useState("");
+  
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
@@ -27,10 +31,13 @@ export default function Dashboard() {
       },
       body: JSON.stringify({
         jobTitle,
-        industry,
         keyWords,
         tone,
         numWords,
+        salary,
+        company,
+        experience,
+        location
       }),
     });
     setIsGenerating(false);
@@ -59,22 +66,52 @@ export default function Dashboard() {
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="industry" className="sr-only">
-                Industry
+              <label className="sr-only" htmlFor="jobTitle">
+                Company Name
               </label>
               <input
-                value={industry}
-                onChange={(e) => setIndustry(e.target.value)}
-                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-                placeholder="Industry (Optional)"
                 type="text"
-                name="industry"
-                id="industry"
+                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+                name="companyName"
+                placeholder="Company "
+                id="Company"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="sr-only" htmlFor="jobTitle">
+                Salary
+              </label>
+              <input
+                type="text"
+                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+                name="salary"
+                placeholder="Salary"
+                id="Salary"
+                value={salary}
+                onChange={(e) => setSalary(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="industry" className="sr-only">
+                Experience
+              </label>
+              <input
+                value={experience}
+                onChange={(e) => setExperience(e.target.value)}
+                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+                placeholder="Experience (Optional)"
+                type="text"
+                name="Experience"
+                id="Experience"
               />
             </div>
             <div className="flex flex-col">
               <label htmlFor="keywords" className="sr-only">
-                Keywords for AI (Optional)
+                Keywords/Requirements for AI (Optional)
               </label>
               <textarea
                 rows={7}
@@ -84,6 +121,20 @@ export default function Dashboard() {
                 id="keyWords"
                 placeholder="Keywords for AI (Optional)"
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="industry" className="sr-only">
+                Location
+              </label>
+              <input
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+                placeholder="Job Location"
+                type="text"
+                name="Location"
+                id="Location"
               />
             </div>
             <div className="flex flex-col">

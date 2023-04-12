@@ -1,9 +1,12 @@
 const generateDescription = async ({
     jobTitle,
-    industry,
     keyWords,
     tone,
     numWords,
+    salary,
+    company,
+    experience,
+    location,
   }) => {
     try {
       const response = await fetch(
@@ -15,11 +18,11 @@ const generateDescription = async ({
             Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
           },
           body: JSON.stringify({
-            prompt: `Write a job description for a  ${jobTitle} role 
-            ${industry ? `in the ${industry} industry` : ""} that is around ${
+            prompt: `Write a job description along with responsibilities for a  ${jobTitle} role in ${company} company 
+            with a salary around ${salary} ${experience ? `with experience of ${experience} years` : ""} that is around ${
               numWords || 200
-            } words in a ${tone || "neutral"} tone. ${
-              keyWords ? `Incorporate the following keywords: ${keyWords}.` : ""
+            } words in a ${tone || "neutral"} tone.The location for job is ${location} ${
+              keyWords ? `with following requirements like: ${keyWords} for the job.` : ""
             }. The job position should be described in a way that is SEO friendly, highlighting its unique features and benefits.`,
             max_tokens: 100,
             temperature: 0.5,
@@ -35,14 +38,19 @@ const generateDescription = async ({
   };
   
   export default async function handler(req, res) {
-    const { jobTitle, industry, keyWords, tone, numWords } = req.body;
+    const { jobTitle, industry, keyWords, tone, numWords,salary,
+      company,
+      experience,location} = req.body;
   
     const jobDescription = await generateDescription({
       jobTitle,
-      industry,
       keyWords,
       tone,
       numWords,
+      salary,
+      company,
+      experience,
+      location
     });
   
     res.status(200).json({
